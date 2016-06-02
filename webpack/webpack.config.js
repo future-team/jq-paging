@@ -56,7 +56,8 @@ module.exports ={
             {
                 test: /\.less$/,
                 loader: "style-loader!css-loader!less-loader"
-            }/*,
+            },
+            { test: /\.html$/, loader: "handlebars-loader" }/*,
              {
              test: /\.less$/,
              loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")

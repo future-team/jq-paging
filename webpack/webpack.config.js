@@ -57,7 +57,11 @@ module.exports ={
                 test: /\.less$/,
                 loader: "style-loader!css-loader!less-loader"
             },
-            { test: /\.html$/, loader: "handlebars-loader" }/*,
+            { test: /\.html$/, loader: "handlebars-loader" },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url?limit=35000'
+            }/*,
              {
              test: /\.less$/,
              loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")

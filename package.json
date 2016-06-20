@@ -1,11 +1,11 @@
 {
-  "name": "module-template",
-  "version": "0.1.1",
-  "description": "模块开发脚手架项目",
+  "name": "jq-paging",
+  "version": "0.1.0",
+  "description": "jq 分页组件",
   "main": "lib/",
-  "repository": "git://code.dianpingoa.com/min.xiao/module-template.git",
+  "repository": "https://github.com/future-team/jq-paging.git",
   "keywords": [
-    "core","template"
+    "core","paging"
   ],
   "scripts": {
     "build": "node_modules/.bin/gulp && node_modules/.bin/gulp min",
@@ -15,8 +15,8 @@
   },
   "license": "MIT",
   "author": {
-    "name": "min.xiao@dianping.com",
-    "email": "min.xiao@dianping.com"
+    "name": "qianjin.pan@dianping.com",
+    "email": "qianjin.pan@dianping.com"
   },
   "dependencies": {
     "extend": "^3.0.0",

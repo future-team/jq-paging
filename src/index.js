@@ -1,4 +1,16 @@
 import '../css/index.less';
-window.show=function(){
-    alert('demo test');
+import $ from 'jquery';
+export Paging from './paging';
+if(typeof(Paging) == 'undefined'){
+    window.Paging = exports['Paging'];
 }
+
+//jquery插件导出
+/*
+$.fn.extend({
+    paging:function(opt){
+        paging(this,opt);
+
+        return this;
+    }
+});*/

@@ -1,0 +1,9 @@
+<ul>
+    {{#each showPages}}
+        {{#if cur}}
+        <li class="on">{{val}}</li>
+        {{else}}
+        <li data-type={{type}}>{{val}}</li>
+        {{/if}}
+    {{/each}}
+</ul>

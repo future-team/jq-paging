@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".jq-pages {\n  color: #666;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages ul {\n  list-style: none;\n}\n.jq-pages ul li {\n  float: left;\n  padding: 10px;\n  font-size: 14px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages ul li.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
+	exports.push([module.id, ".jq-pages {\n  color: #666;\n}\n.jq-pages .page-tips {\n  display: inline-block;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.jq-pages ul li {\n  float: left;\n  padding: 10px;\n  font-size: 14px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages ul li.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
 
 	// exports
 
@@ -10274,7 +10274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * 渲染分页列表
+	     * 获取分页列表
 	     * */
 
 	    Pagination.prototype.renderPagination = function renderPagination() {
@@ -10343,7 +10343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                val: i
 	            });
 	        }
-	        pageNum > showNum && currentPage < pageNum - 2 && pages.push({ type: 'text', val: '...' });
+	        pageNum > showNum && currentPage < pageNum - addIndex && pages.push({ type: 'text', val: '...' });
 	        currentPage < pageNum && pages.push({ type: 'text', val: '下一页' });
 	        return pages;
 	    };
@@ -10392,8 +10392,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Pagination.prototype.bindEvents = function bindEvents() {
 	        var _this = this.root,
 	            that = this;
-	        var lis = _this.find('li[data-type="num"]'),
-	            tips = _this.find('li[data-type="text"]');
 	        _this.on('click', 'li[data-type="num"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
@@ -10477,7 +10475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<ul>\n"
+	  return "<ul class=\"clearfix\">\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</ul>";
 	},"useData":true});

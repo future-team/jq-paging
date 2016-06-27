@@ -15,8 +15,17 @@ let options = {
      * 页面显示的页数
      * */
     showNum: 5,
+    /**
+     * 插入分页的元素标记
+     * */
     root:'#pages',
-    clickCallBack: function(){}
+    /**
+     * 点击回调事件
+     * 返回参数为要显示的页数
+     * */
+    clickCallBack: function(num){
+
+    }
 
 };
 export default options;

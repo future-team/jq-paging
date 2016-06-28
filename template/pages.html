@@ -1,0 +1,15 @@
+<div class="jq-pages">
+    <div class="page-tips">
+        <span class="activePage">{{currentPage}}</span>
+        <span>/{{pageNum}},共{{total}}条</span>
+    </div>
+    <ul class="clearfix">
+        {{#each showPages}}
+        {{#if cur}}
+        <li class="on">{{val}}</li>
+        {{else}}
+        <li data-type={{type}}>{{val}}</li>
+        {{/if}}
+        {{/each}}
+    </ul>
+</div>

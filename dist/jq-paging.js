@@ -84,14 +84,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	//jquery插件导出
-	/*
-	$.fn.extend({
-	    paging:function(opt){
-	        paging(this,opt);
+	_jquery2['default'].fn.extend({
+	    Paging: (function (_Paging2) {
+	        function Paging(_x) {
+	            return _Paging2.apply(this, arguments);
+	        }
 
+	        Paging.toString = function () {
+	            return _Paging2.toString();
+	        };
+
+	        return Paging;
+	    })(function (opt) {
+	        Paging(this, opt);
 	        return this;
-	    }
-	});*/
+	    })
+	});
 
 /***/ },
 /* 2 */
@@ -10254,13 +10262,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _optionsJs2 = _interopRequireDefault(_optionsJs);
 
-	var _templateLisHtml = __webpack_require__(9);
+	var _templatePagesHtml = __webpack_require__(9);
 
-	var _templateLisHtml2 = _interopRequireDefault(_templateLisHtml);
-
-	var _templateTipsHtml = __webpack_require__(29);
-
-	var _templateTipsHtml2 = _interopRequireDefault(_templateTipsHtml);
+	var _templatePagesHtml2 = _interopRequireDefault(_templatePagesHtml);
 
 	var Pagination = (function () {
 	    function Pagination(options) {
@@ -10288,9 +10292,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * */
 
 	    Pagination.prototype.renderHtml = function renderHtml() {
-	        var tips = _templateTipsHtml2['default'](this.opts),
-	            lis = _templateLisHtml2['default'](this.opts);
-	        this.root.html(tips + lis);
+	        var pages = _templatePagesHtml2['default'](this.opts);
+	        this.root.html(pages);
 	    };
 
 	    /**
@@ -10441,8 +10444,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * 页面显示的页数
 	   * */
 	  showNum: 5,
+	  /**
+	   * 插入分页的元素标记
+	   * */
 	  root: '#pages',
-	  clickCallBack: function clickCallBack() {}
+	  /**
+	   * 点击回调事件
+	   * 返回参数为要显示的页数
+	   * */
+	  clickCallBack: function clickCallBack(num) {}
 
 	};
 	exports['default'] = options;
@@ -10473,11 +10483,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
 	    + "</li>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1;
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "<ul class=\"clearfix\">\n"
-	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "</ul>";
+	  return "<div class=\"jq-pages\">\n    <div class=\"page-tips\">\n        <span class=\"activePage\">"
+	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
+	    + "</span>\n        <span>/"
+	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
+	    + ",共"
+	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+	    + "条</span>\n    </div>\n    <ul class=\"clearfix\">\n"
+	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "    </ul>\n</div>";
 	},"useData":true});
 
 /***/ },
@@ -11654,24 +11670,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL25vLWNvbmZsaWN0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O3FCQUNlLFVBQVMsVUFBVSxFQUFFOztBQUVsQyxNQUFJLElBQUksR0FBRyxPQUFPLE1BQU0sS0FBSyxXQUFXLEdBQUcsTUFBTSxHQUFHLE1BQU07TUFDdEQsV0FBVyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7O0FBRWxDLFlBQVUsQ0FBQyxVQUFVLEdBQUcsWUFBVztBQUNqQyxRQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssVUFBVSxFQUFFO0FBQ2xDLFVBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDO0tBQy9CO0FBQ0QsV0FBTyxVQUFVLENBQUM7R0FDbkIsQ0FBQztDQUNIIiwiZmlsZSI6Im5vLWNvbmZsaWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyogZ2xvYmFsIHdpbmRvdyAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oSGFuZGxlYmFycykge1xuICAvKiBpc3RhbmJ1bCBpZ25vcmUgbmV4dCAqL1xuICBsZXQgcm9vdCA9IHR5cGVvZiBnbG9iYWwgIT09ICd1bmRlZmluZWQnID8gZ2xvYmFsIDogd2luZG93LFxuICAgICAgJEhhbmRsZWJhcnMgPSByb290LkhhbmRsZWJhcnM7XG4gIC8qIGlzdGFuYnVsIGlnbm9yZSBuZXh0ICovXG4gIEhhbmRsZWJhcnMubm9Db25mbGljdCA9IGZ1bmN0aW9uKCkge1xuICAgIGlmIChyb290LkhhbmRsZWJhcnMgPT09IEhhbmRsZWJhcnMpIHtcbiAgICAgIHJvb3QuSGFuZGxlYmFycyA9ICRIYW5kbGViYXJzO1xuICAgIH1cbiAgICByZXR1cm4gSGFuZGxlYmFycztcbiAgfTtcbn1cbiJdfQ==
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(10);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-	  return "<div class=\"page-tips\">\n    <span class=\"activePage\">"
-	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
-	    + "</span>\n    <span>/"
-	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
-	    + ",共"
-	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-	    + "条</span>\n</div>";
-	},"useData":true});
 
 /***/ }
 /******/ ])

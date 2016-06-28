@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import opts from './options.js';
-import liTemplate from '../template/lis.html';
-import tipTemplate from '../template/tips.html';
+import pagesTemplate from '../template/pages.html';
 class Pagination {
     constructor(options) {
         this.opts = $.extend({}, opts, options);
@@ -10,7 +9,6 @@ class Pagination {
         this.renderPagination();
         this.bindEvents();
     }
-
     /**
      * 获取分页列表
      * */
@@ -24,9 +22,8 @@ class Pagination {
      * 渲染页面
      * */
     renderHtml() {
-        let tips = tipTemplate(this.opts),
-            lis = liTemplate(this.opts);
-        this.root.html(tips + lis);
+        let pages = pagesTemplate(this.opts);
+        this.root.html(pages);
     }
 
     /**

@@ -6,11 +6,9 @@ if(typeof(Paging) == 'undefined'){
 }
 
 //jquery插件导出
-/*
 $.fn.extend({
-    paging:function(opt){
-        paging(this,opt);
-
+    Paging:function(opt){
+        Paging(this,opt);
         return this;
     }
-});*/
+});

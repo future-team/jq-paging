@@ -50,6 +50,9 @@ class Pagination {
             }
         } else {
             pages.push({
+                 type:'num',
+                 val:'1'
+            },{
                 type: 'text',
                 val: '...'
             });
@@ -74,8 +77,8 @@ class Pagination {
                 val: i
             });
         }
-        (pageNum > showNum && currentPage < pageNum - addIndex) && pages.push({type: 'text', val: '...'});
-        currentPage < pageNum && pages.push({type: 'text', val: '下一页'})
+        (pageNum > showNum && currentPage < pageNum - addIndex) && pages.push({type: 'text', val: '...'},{type:'num',val:pageNum});
+        currentPage < pageNum && pages.push({type: 'text', val: '下一页'});
         return pages;
     }
 

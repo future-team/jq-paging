@@ -44,6 +44,12 @@ module.exports ={
             commonjs2: 'eagle-ui/lib/utils/Component',
             commonjs: 'eagle-ui/lib/utils/Component',
             amd: 'eagle-ui/lib/utils/Component'
+        },
+        'jquery':{
+            root: 'jQuery',
+            commonjs2: 'jQuery',
+            commonjs: 'jQuery',
+            amd: 'jQuery'
         }
     }],
     module:{

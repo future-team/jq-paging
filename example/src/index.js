@@ -5,7 +5,7 @@ import $ from 'jquery';
    new Paging({
       pageSize:5,
       total:203,
-      showNum:9,
+      showNum:5,
       clickCallBack:function(num){
          console.log('第'+num+'页');
       }

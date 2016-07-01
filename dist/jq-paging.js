@@ -508,6 +508,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        } else {
 	            pages.push({
+	                type: 'num',
+	                val: '1'
+	            }, {
 	                type: 'text',
 	                val: '...'
 	            });
@@ -532,7 +535,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                val: i
 	            });
 	        }
-	        pageNum > showNum && currentPage < pageNum - addIndex && pages.push({ type: 'text', val: '...' });
+	        pageNum > showNum && currentPage < pageNum - addIndex && pages.push({ type: 'text', val: '...' }, {
+	            type: 'num',
+	            val: pageNum
+	        });
 	        currentPage < pageNum && pages.push({ type: 'text', val: '下一页' });
 	        return pages;
 	    };
@@ -635,6 +641,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * */
 	  root: '#pages',
 	  /**
+	   * 是否显示提示,默认显示
+	   * */
+	  showTip: true,
+	  /**
+	   * tip是否显示在左边，true为左false为右，默认为true
+	   * */
+	  leftTip: true,
+	  /**
 	   * 点击回调事件
 	   * 返回参数为要显示的页数
 	   * */
@@ -653,14 +667,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.cur : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "");
+	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 	},"2":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "    <div class=\"page-tips\">\n        <span class=\"activePage\">"
+	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
+	    + "</span>\n        <span>/"
+	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
+	    + ",共"
+	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+	    + "条</span>\n    </div>\n";
+	},"4":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.cur : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "");
+	},"5":function(container,depth0,helpers,partials,data) {
 	    var helper;
 
 	  return "        <li class=\"on\">"
 	    + container.escapeExpression(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"val","hash":{},"data":data}) : helper)))
 	    + "</li>\n";
-	},"4":function(container,depth0,helpers,partials,data) {
+	},"7":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
 	  return "        <li data-type="
@@ -668,18 +696,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    + ">"
 	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
 	    + "</li>\n";
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+	},"9":function(container,depth0,helpers,partials,data) {
+	    var stack1;
 
-	  return "<div class=\"jq-pages\">\n    <div class=\"page-tips\">\n        <span class=\"activePage\">"
-	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
-	    + "</span>\n        <span>/"
-	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
-	    + ",共"
-	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-	    + "条</span>\n    </div>\n    <ul class=\"clearfix\">\n"
-	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    </ul>\n</div>";
+	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1, alias1=depth0 != null ? depth0 : {};
+
+	  return "<div class=\"jq-pages\">\n"
+	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "    <ul class=\"clearfix\">\n"
+	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "    </ul>\n"
+	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "</div>";
 	},"useData":true});
 
 /***/ },

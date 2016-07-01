@@ -1,6 +1,6 @@
 {
   "name": "jq-paging",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "jq 分页组件",
   "main": "lib/",
   "repository": "https://github.com/future-team/jq-paging.git",

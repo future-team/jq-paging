@@ -20,9 +20,13 @@ let options = {
      * */
     root:'#pages',
     /**
-     * 是否显示提示
+     * 是否显示提示,默认显示
      * */
     showTip: true,
+    /**
+     * tip是否显示在左边，true为左false为右，默认为true
+     * */
+    leftTip: true,
     /**
      * 点击回调事件
      * 返回参数为要显示的页数

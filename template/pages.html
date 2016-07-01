@@ -1,9 +1,11 @@
 <div class="jq-pages">
     {{#if showTip}}
+    {{#if leftTip}}
     <div class="page-tips">
         <span class="activePage">{{currentPage}}</span>
         <span>/{{pageNum}},共{{total}}条</span>
     </div>
+    {{/if}}
     {{/if}}
     <ul class="clearfix">
         {{#each showPages}}
@@ -14,4 +16,12 @@
         {{/if}}
         {{/each}}
     </ul>
+    {{#if showTip}}
+    {{#unless leftTip}}
+    <div class="page-tips">
+        <span class="activePage">{{currentPage}}</span>
+        <span>/{{pageNum}},共{{total}}条</span>
+    </div>
+    {{/unless}}
+    {{/if}}
 </div>

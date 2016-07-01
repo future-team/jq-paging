@@ -9,6 +9,7 @@ class Pagination {
         this.renderPagination();
         this.bindEvents();
     }
+
     /**
      * 获取分页列表
      * */
@@ -25,7 +26,6 @@ class Pagination {
         let pages = pagesTemplate(this.opts);
         this.root.html(pages);
     }
-
     /**
      * 获取页数
      * */
@@ -38,35 +38,35 @@ class Pagination {
      * */
     getShowPage(pageNum) {
         let showNum = this.opts.showNum;
-        let addIndex = parseInt(showNum/2);
+        let addIndex = parseInt(showNum / 2);
         let endIndex = showNum,
             startIndex = 1,
             pages = [];
         let currentPage = this.opts.currentPage;
         currentPage > 1 && pages.push({type: 'text', val: '上一页'});
         if (currentPage <= showNum) {
-            if(pageNum <= showNum){
+            if (pageNum <= showNum) {
                 endIndex = pageNum;
             }
         } else {
             pages.push({
-                 type:'num',
-                 val:'1'
-            },{
+                type: 'num',
+                val: '1'
+            }, {
                 type: 'text',
                 val: '...'
             });
-            if (currentPage > showNum && currentPage < pageNum - addIndex ) {
+            if (currentPage > showNum && currentPage < pageNum - addIndex) {
                 endIndex = currentPage + addIndex;
                 startIndex = currentPage - addIndex;
-            }else if(currentPage <= pageNum){
+            } else if (currentPage <= pageNum) {
                 endIndex = pageNum;
                 startIndex = pageNum - showNum;
             }
         }
         let curr = false;
         for (var i = startIndex; i <= endIndex; i++) {
-            if(currentPage == i) {
+            if (currentPage == i) {
                 curr = true;
             } else {
                 curr = false;
@@ -77,7 +77,10 @@ class Pagination {
                 val: i
             });
         }
-        (pageNum > showNum && currentPage < pageNum - addIndex) && pages.push({type: 'text', val: '...'},{type:'num',val:pageNum});
+        (pageNum > showNum && currentPage < pageNum - addIndex) && pages.push({type: 'text', val: '...'}, {
+            type: 'num',
+            val: pageNum
+        });
         currentPage < pageNum && pages.push({type: 'text', val: '下一页'});
         return pages;
     }
@@ -100,13 +103,13 @@ class Pagination {
         this.goToPage(num);
     }
 
-   /* goLast() {
+    /* goLast() {
 
-    }
+     }
 
-    goFirst() {
+     goFirst() {
 
-    }*/
+     }*/
     /**
      * 不同提示处理
      * */
@@ -126,13 +129,13 @@ class Pagination {
     bindEvents() {
         let _this = this.root,
             that = this;
-        _this.on('click', 'li[data-type="num"]',function (e) {
+        _this.on('click', 'li[data-type="num"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let num = parseInt(_this.text());
             that.goToPage(num);
         });
-        _this.on('click', 'li[data-type="text"]',function (e) {
+        _this.on('click', 'li[data-type="text"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let type = _this.text();

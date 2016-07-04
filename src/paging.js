@@ -102,14 +102,6 @@ class Pagination {
         let num = flag ? this.opts.currentPage + 1 : this.opts.currentPage - 1;
         this.goToPage(num);
     }
-
-    /* goLast() {
-
-     }
-
-     goFirst() {
-
-     }*/
     /**
      * 不同提示处理
      * */
@@ -129,13 +121,13 @@ class Pagination {
     bindEvents() {
         let _this = this.root,
             that = this;
-        _this.on('click', 'li[data-type="num"]', function (e) {
+        _this.on('click', 'a[data-type="num"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let num = parseInt(_this.text());
             that.goToPage(num);
         });
-        _this.on('click', 'li[data-type="text"]', function (e) {
+        _this.on('click', 'a[data-type="text"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let type = _this.text();

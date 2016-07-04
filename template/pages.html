@@ -7,15 +7,15 @@
     </div>
     {{/if}}
     {{/if}}
-    <ul class="clearfix">
+    <div class="clearfix">
         {{#each showPages}}
         {{#if cur}}
-        <li class="on">{{val}}</li>
+        <a href="javascript:void(0)" class="on">{{val}}</a>
         {{else}}
-        <li data-type={{type}}>{{val}}</li>
+        <a href="javascript:void(0)" data-type={{type}}>{{val}}</a>
         {{/if}}
         {{/each}}
-    </ul>
+    </div>
     {{#if showTip}}
     {{#unless leftTip}}
     <div class="page-tips">

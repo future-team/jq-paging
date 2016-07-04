@@ -9,6 +9,7 @@ import $ from 'jquery';
       showTip:false,
       leftTip:true,
       clickCallBack:function(num){
+         location.hash = num;
          console.log('第'+num+'页');
       }
    });

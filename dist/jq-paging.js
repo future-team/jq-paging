@@ -136,7 +136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".jq-pages {\n  color: #666;\n  font-size: 12px;\n}\n.jq-pages .page-tips {\n  display: inline-block;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.jq-pages ul li {\n  float: left;\n  padding: 5px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages ul li.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
+	exports.push([module.id, ".jq-pages {\n  color: #666;\n  font-size: 12px;\n  /*ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    vertical-align: middle;*/\n}\n.jq-pages .page-tips {\n  display: inline-block;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages a {\n  text-decoration: none;\n  padding: 5px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages a.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
 
 	// exports
 
@@ -563,10 +563,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.goToPage(num);
 	    };
 
-	    /* goLast() {
-	      }
-	      goFirst() {
-	      }*/
 	    /**
 	     * 不同提示处理
 	     * */
@@ -587,13 +583,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Pagination.prototype.bindEvents = function bindEvents() {
 	        var _this = this.root,
 	            that = this;
-	        _this.on('click', 'li[data-type="num"]', function (e) {
+	        _this.on('click', 'a[data-type="num"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var num = parseInt(_this.text());
 	            that.goToPage(num);
 	        });
-	        _this.on('click', 'li[data-type="text"]', function (e) {
+	        _this.on('click', 'a[data-type="text"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var type = _this.text();
@@ -685,17 +681,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	},"5":function(container,depth0,helpers,partials,data) {
 	    var helper;
 
-	  return "        <li class=\"on\">"
+	  return "        <a href=\"javascript:void(0)\" class=\"on\">"
 	    + container.escapeExpression(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"val","hash":{},"data":data}) : helper)))
-	    + "</li>\n";
+	    + "</a>\n";
 	},"7":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "        <li data-type="
+	  return "        <a href=\"javascript:void(0)\" data-type="
 	    + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
 	    + ">"
 	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-	    + "</li>\n";
+	    + "</a>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -715,9 +711,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return "<div class=\"jq-pages\">\n"
 	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    <ul class=\"clearfix\">\n"
+	    + "    <div class=\"clearfix\">\n"
 	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    </ul>\n"
+	    + "    </div>\n"
 	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</div>";
 	},"useData":true});

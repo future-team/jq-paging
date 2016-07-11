@@ -2,15 +2,21 @@ import { Paging } from '../../src/index.js';
 import $ from 'jquery';
 
 (()=>{
-   new Paging({
+   Paging({
       pageSize:5,
       total:192,
       showNum:5,
-      showTip:false,
-      leftTip:true,
+      showTip:true,
+      leftTip:false,
       clickCallBack:function(num){
          location.hash = num;
          console.log('第'+num+'页');
       }
    });
+  /* $('#pages').Paging({
+      clickCallBack:function(num){
+         location.hash = num;
+         console.log('第'+num+'页');
+      }
+   });*/
 })();

@@ -8,7 +8,7 @@ if(typeof(Paging) == 'undefined'){
 //jquery插件导出
 $.fn.extend({
     Paging:function(opt){
-        Paging(this,opt);
+        Paging(opt,this);
         return this;
     }
 });

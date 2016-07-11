@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return Paging;
 	    })(function (opt) {
-	        Paging(this, opt);
+	        Paging(opt, this);
 	        return this;
 	    })
 	});
@@ -136,7 +136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".jq-pages {\n  color: #666;\n  font-size: 12px;\n  /*ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    vertical-align: middle;*/\n}\n.jq-pages .page-tips {\n  display: inline-block;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages a {\n  text-decoration: none;\n  padding: 5px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages a.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
+	exports.push([module.id, ".jq-pages {\n  color: #666;\n  font-size: 12px;\n}\n.jq-pages .page-tips,\n.jq-pages .page-num {\n  display: inline-block;\n  line-height: 24px;\n}\n.jq-pages .activePage {\n  color: #ff6633;\n}\n.jq-pages a {\n  text-decoration: none;\n  padding: 5px;\n  color: #999;\n  background: #f9f9f9;\n  border: 1px solid #d8d8d8;\n  cursor: pointer;\n  margin: 2px;\n}\n.jq-pages a.on {\n  color: #fff;\n  background: #d8d8d8;\n}\n.clearfix:before,\n.clearfix:after {\n  display: table;\n  line-height: 0;\n  content: \"\";\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
 
 	// exports
 
@@ -711,7 +711,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return "<div class=\"jq-pages\">\n"
 	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    <div class=\"clearfix\">\n"
+	    + "    <div class=\"page-num\">\n"
 	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "    </div>\n"
 	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")

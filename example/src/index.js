@@ -13,10 +13,11 @@ import $ from 'jquery';
          console.log('第'+num+'页');
       }
    });
-  /* $('#pages').Paging({
+   $('#pages1').Paging({
+       root:'#pages1',
       clickCallBack:function(num){
          location.hash = num;
          console.log('第'+num+'页');
       }
-   });*/
+   });
 })();

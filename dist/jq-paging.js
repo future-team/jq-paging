@@ -673,7 +673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
 	    + ",共"
 	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-	    + "页</span>\n    </div>\n";
+	    + "条</span>\n    </div>\n";
 	},"4":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -695,17 +695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-	},"10":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-	  return "    <div class=\"page-tips\">\n        <span class=\"activePage\">"
-	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
-	    + "</span>\n        <span>/"
-	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
-	    + ",共"
-	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-	    + "条</span>\n    </div>\n";
+	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 

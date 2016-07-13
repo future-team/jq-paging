@@ -128,13 +128,13 @@ class Pagination {
         let _this = this.root,
             pageId = "#"+this.opts.id,
             that = this;
-        _this.on('click', pageId+' a[data-type="num"]', function (e) {
+        _this.on('click', `${pageId} a[data-type="num"]`, function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let num = parseInt(_this.text());
             that.goToPage(num);
         });
-        _this.on('click', pageId+' a[data-type="text"]', function (e) {
+        _this.on('click', `${pageId} a[data-type="text"]`, function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let type = _this.text();

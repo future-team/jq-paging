@@ -457,11 +457,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _classCallCheck(this, Pagination);
 
 	        this.opts = _jquery2['default'].extend({}, _optionsJs2['default'], options);
+	        this.opts.id = this.getUniqueId();
 	        //插入标记位
 	        this.root = _jquery2['default'](this.opts.root);
 	        this.renderPagination();
 	        this.bindEvents();
 	    }
+
+	    /**
+	     * 获取唯一的id
+	     * */
+
+	    Pagination.prototype.getUniqueId = function getUniqueId() {
+	        return 'jq' + Math.floor(Math.random() * 100);
+	    };
 
 	    /**
 	     * 获取分页列表
@@ -582,15 +591,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    Pagination.prototype.bindEvents = function bindEvents() {
 	        var _this = this.root,
+	            pageId = "#" + this.opts.id,
 	            that = this;
-	        this.bind = true;
-	        _this.on('click', 'a[data-type="num"]', function (e) {
+	        _this.on('click', pageId + ' a[data-type="num"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var num = parseInt(_this.text());
 	            that.goToPage(num);
 	        });
-	        _this.on('click', 'a[data-type="text"]', function (e) {
+	        _this.on('click', pageId + ' a[data-type="text"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var type = _this.text();
@@ -708,9 +717,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1, alias1=depth0 != null ? depth0 : {};
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
 
-	  return "<div class=\"jq-pages\">\n"
+	  return "<div class=\"jq-pages\" id="
+	    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">\n"
 	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "    <div class=\"page-num\">\n"
 	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")

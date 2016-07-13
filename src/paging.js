@@ -4,12 +4,18 @@ import pagesTemplate from '../template/pages.html';
 class Pagination {
     constructor(options) {
         this.opts = $.extend({}, opts, options);
+        this.opts.id = this.getUniqueId();
         //插入标记位
         this.root = $(this.opts.root);
         this.renderPagination();
         this.bindEvents();
     }
-
+    /**
+     * 获取唯一的id
+     * */
+    getUniqueId(){
+        return 'jq'+Math.floor(Math.random()*100);
+    }
     /**
      * 获取分页列表
      * */
@@ -120,15 +126,15 @@ class Pagination {
 
     bindEvents() {
         let _this = this.root,
+            pageId = "#"+this.opts.id,
             that = this;
-        this.bind = true;
-        _this.on('click', 'a[data-type="num"]', function (e) {
+        _this.on('click', pageId+' a[data-type="num"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let num = parseInt(_this.text());
             that.goToPage(num);
         });
-        _this.on('click', 'a[data-type="text"]', function (e) {
+        _this.on('click', pageId+' a[data-type="text"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let type = _this.text();

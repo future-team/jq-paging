@@ -33,7 +33,11 @@ let options = {
      * */
     clickCallBack: function(num){
 
-    }
+    },
+    /**
+     * 动态改变配置项参数
+     * */
+    setOpts:function(opts){}
 
 };
 export default options;

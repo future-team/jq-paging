@@ -583,6 +583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Pagination.prototype.bindEvents = function bindEvents() {
 	        var _this = this.root,
 	            that = this;
+	        this.bind = true;
 	        _this.on('click', 'a[data-type="num"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
@@ -595,6 +596,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var type = _this.text();
 	            that.tipHandler(_this, type);
 	        });
+	    };
+
+	    Pagination.prototype.setOpts = function setOpts(opts) {
+	        var options = this.opts;
+	        this.opts = _jquery2['default'].extend({}, options, opts);
+	        this.renderPagination();
 	    };
 
 	    return Pagination;
@@ -648,7 +655,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * 点击回调事件
 	   * 返回参数为要显示的页数
 	   * */
-	  clickCallBack: function clickCallBack(num) {}
+	  clickCallBack: function clickCallBack(num) {},
+	  /**
+	   * 动态改变配置项参数
+	   * */
+	  setOpts: function setOpts(opts) {}
 
 	};
 	exports['default'] = options;

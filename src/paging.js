@@ -121,6 +121,7 @@ class Pagination {
     bindEvents() {
         let _this = this.root,
             that = this;
+        this.bind = true;
         _this.on('click', 'a[data-type="num"]', function (e) {
             e.preventDefault();
             let _this = $(e.target);
@@ -133,6 +134,11 @@ class Pagination {
             let type = _this.text();
             that.tipHandler(_this, type);
         })
+    }
+    setOpts(opts){
+        let options = this.opts;
+        this.opts = $.extend({},options,opts);
+        this.renderPagination();
     }
 }
 

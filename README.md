@@ -40,7 +40,11 @@
         * */
        clickCallBack: function(num){
    
-       }
+       },
+       /**
+        * 动态改变配置项参数
+        * */
+       setOpts:function(opts){}
        
  ```
  使用实例：

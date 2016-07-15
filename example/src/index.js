@@ -27,7 +27,7 @@ import $ from 'jquery';
          total:40,
          showNum:5,
          clickCallBack:function(num){
-            console.log('第'+num+'页2');
+            //console.log('第'+num+'页2');
          }
       });
    })

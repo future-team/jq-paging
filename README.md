@@ -63,6 +63,26 @@
           }
        });
     })();
+    //实例化后更改配置项
+    let a = Paging({
+          pageSize:5,
+          total:192,
+          showNum:5,
+          showTip:true,
+          leftTip:false,
+          clickCallBack:function(num){
+             location.hash = num;
+             console.log('第'+num+'页');
+          }
+       });
+      a.setOpts({
+        pageSize:6,
+        total:40,
+        showNum:5,
+        clickCallBack:function(num){
+            console.log('第'+num+'页2');
+        }
+      });  
  ```
  html:
  

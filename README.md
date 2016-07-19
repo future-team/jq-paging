@@ -51,6 +51,7 @@
  js:
  
  ```
+ 
     import { Paging } from '../../src/index.js';
     (()=>{
        new Paging({
@@ -83,14 +84,26 @@
             console.log('第'+num+'页2');
         }
       });  
+      
  ```
  html:
  
  ```
+ 
     <div id="root" style="padding: 10px">
         <div id="pages" class="jq-pages"></div>
     </div>
+    
  ```
+ - 注：若要兼容ie8及以下版本请引入es5-shim。    
+   在html中判断版本，ie9以下引入。例如：    
+  
+  ```
+     <!--[if lt IE 9] >
+     <script src="http://cdn.bootcss.com/es5-shim/4.5.9/es5-shim.js"></script>
+     <!--[endif]-->
+  
+  ```
 
 ## Command
 

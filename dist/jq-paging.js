@@ -478,6 +478,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    Pagination.prototype.renderPagination = function renderPagination() {
 	        this.opts.pageNum = this.getPageNum();
+	        //防止重新设置后总页数小于当前页,重置为1
+	        if (this.opts.currentPage > this.opts.pageNum) {
+	            this.opts.currentPage = 1;
+	        };
 	        this.opts.showPages = this.getShowPage(this.opts.pageNum);
 	        this.opts.root && this.renderHtml();
 	    };
@@ -523,7 +527,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                type: 'text',
 	                val: '...'
 	            });
-	            if (currentPage > showNum && currentPage < pageNum - addIndex) {
+	            if (currentPage < pageNum - addIndex) {
 	                endIndex = currentPage + addIndex;
 	                startIndex = currentPage - addIndex;
 	            } else if (currentPage <= pageNum) {
@@ -544,7 +548,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                val: i
 	            });
 	        }
-	        pageNum > showNum && currentPage < pageNum - addIndex && pages.push({ type: 'text', val: '...' }, {
+	        /**
+	         * 当前页正好等于showum时，并没有进行居中操作。
+	         * 总页数大于展示页且当前页小等于展示页数，增加...
+	         * */
+	        pageNum > showNum && currentPage <= showNum && pages.push({ type: 'text', val: '...' }, {
+	            type: 'num',
+	            val: pageNum
+	        });
+	        /**
+	         * 当前页大于showum时，已经进行居中操作。
+	         * 剩下的页数，大于showum的1/2时增加...
+	         * */
+	        currentPage > showNum && currentPage < pageNum - addIndex && pages.push({ type: 'text', val: '...' }, {
 	            type: 'num',
 	            val: pageNum
 	        });

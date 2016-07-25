@@ -104,6 +104,10 @@
      <!--[endif]-->
   
   ```
+## update
+
+   - 0.1.10 更新setOpts之后分页的bug
+   - 之前版本 init及修复 
 
 ## Command
 

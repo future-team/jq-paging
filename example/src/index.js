@@ -23,9 +23,9 @@ import $ from 'jquery';
    });
    $('#test').on('click',function(){
       a.setOpts({
-         pageSize:6,
-         total:40,
-         showNum:5,
+         pageSize:10,
+         total:37,
+         showNum:3,
          clickCallBack:function(num){
             //console.log('第'+num+'页2');
          }

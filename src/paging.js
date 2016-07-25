@@ -66,12 +66,17 @@ class Pagination {
                 type: 'text',
                 val: '...'
             });
+            debugger
             if (currentPage < pageNum - addIndex) {
                 endIndex = currentPage + addIndex;
                 startIndex = currentPage - addIndex;
             } else if (currentPage <= pageNum) {
                 endIndex = pageNum;
-                startIndex = pageNum - showNum;
+                let saterIndexs = pageNum - showNum;
+                /**
+                 * 临界条件，当总页数恰好比shownum大1时。。。不能从一开始计数
+                 * */
+                startIndex = saterIndexs > 1 ? saterIndexs : 2;
             }
         }
         let curr = false;

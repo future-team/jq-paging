@@ -5,7 +5,7 @@ import $ from 'jquery';
    let a = null;
    a = Paging({
       pageSize:5,
-      total:192,
+      total:32,
       showNum:5,
       showTip:true,
       leftTip:false,
@@ -16,6 +16,9 @@ import $ from 'jquery';
    });
    let b = $('#pages1').Paging({
        root:'#pages1',
+      pageSize:5,
+      total:132,
+      showNum:5,
       clickCallBack:function(num){
          location.hash = num;
          console.log('第'+num+'页');

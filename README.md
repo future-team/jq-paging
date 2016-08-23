@@ -3,9 +3,9 @@
  分页组件
 ## UI展示
  - 具体图如下：    
-   提示在左边：  
+   总条数，当前页之类提示在左边：  
    <img src="./img/tip-left.png" />    
-   提示在右边：   
+   总条数，当前页之类提示在右边：   
    <img src="./img/tip-right.png" />    
    无提示：  
    <img src="./img/tip-no.png" />  

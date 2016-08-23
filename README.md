@@ -1,7 +1,18 @@
 # jq-paging
  pagination for jQuery 
  分页组件
-
+## UI展示
+ - 具体图如下：
+   提示在左边：  
+   
+   <img src="./img/tip-left.png" />    
+   提示在右边：   
+   
+   <img src="./img/tip-right.png" />    
+   无提示：  
+   
+   <img src="./img/tip-no.png" />  
+   
 ## 使用
  - 使用时，应指定在何处插入分页，即传入root对应的选择器，配置项如下：
  

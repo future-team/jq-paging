@@ -39,17 +39,32 @@ class Pagination {
      * 获得每页具体url
      * */
     getUrls() {
-        var links = [];
+        var self= this,
+            links = [];
         var pageNums = this.opts.showPages,
             url = this.baseUrl,
-            key= this.opts.linkOpts.key;
-
-        pageNums.forEach(function (item) {
-            links.push(url.replace(eval('/'+key+'=\\d+/'),key+'='+item.val));
+            key= this.opts.linkOpts.key,
+            cur = this.opts.currentPage;
+        pageNums.forEach(function (item,index) {
+            var val = self.mapText(item.val,cur);
+            if(val == '...') {
+                links.push('javascript:void(0)');
+            }else{
+                links.push(url.replace(eval('/'+key+'=\\d+/'),key+'='+val));
+            }
         })
         return links;
     }
-
+    /**
+     * 处理文本的情况
+     * */
+    mapText(val,cur){
+        var mapping = {
+            '上一页':cur-1,
+            '下一页':cur*1+1
+        };
+        return mapping[val] || val;
+    }
     /**
      * 获取唯一的id
      * */

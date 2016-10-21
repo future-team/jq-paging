@@ -1,31 +1,73 @@
 import $ from 'jquery';
 import opts from './options.js';
+import './helpr.js';
 import pagesTemplate from '../template/pages.html';
 class Pagination {
     constructor(options) {
         this.opts = $.extend({}, opts, options);
         this.opts.id = this.getUniqueId();
+        //是否通过link跳转
+        this.opts.urlLink = this.opts.isLink;
         //插入标记位
         this.root = $(this.opts.root);
+        /**
+         * 非ajax，currentPage由url确定
+         * * */
+        this.opts.urlLink && (this.opts.currentPage = this.getUrlPage());
         this.renderPagination();
-        this.bindEvents();
+        /**
+         * 非链接跳转才需要bindEvent
+         * */
+        !this.opts.urlLink && this.bindEvents();
     }
+    /**
+     * 从href中获取当前页，更改默认值
+     * */
+    getUrlPage() {
+        var url = this.opts.linkOpts.baseUrl;
+        return url.split(this.opts.linkOpts.key + '=')[1].split('&')+'';
+    }
+
+    /**
+     * 获取链接跳转时参数
+     * */
+    getUrlParam() {
+        this.baseUrl = this.opts.linkOpts.baseUrl;
+        this.opts.links = this.getUrls();
+    }
+    /**
+     * 获得每页具体url
+     * */
+    getUrls() {
+        var links = [];
+        var pageNums = this.opts.showPages,
+            url = this.baseUrl,
+            key= this.opts.linkOpts.key;
+
+        pageNums.forEach(function (item) {
+            links.push(url.replace(eval('/'+key+'=\\d+/'),key+'='+item.val));
+        })
+        return links;
+    }
+
     /**
      * 获取唯一的id
      * */
-    getUniqueId(){
-        return 'jq'+Math.floor(Math.random()*100);
+    getUniqueId() {
+        return 'jq' + Math.floor(Math.random() * 100);
     }
+
     /**
      * 获取分页列表
      * */
     renderPagination() {
         this.opts.pageNum = this.getPageNum();
         //防止重新设置后总页数小于当前页,重置为1
-        if(this.opts.currentPage > this.opts.pageNum){
+        if (this.opts.currentPage > this.opts.pageNum) {
             this.opts.currentPage = 1;
-        };
+        }
         this.opts.showPages = this.getShowPage(this.opts.pageNum);
+        this.opts.urlLink && this.getUrlParam();
         this.opts.root && this.renderHtml();
     }
 
@@ -36,6 +78,7 @@ class Pagination {
         let pages = pagesTemplate(this.opts);
         this.root.html(pages);
     }
+
     /**
      * 获取页数
      * */
@@ -127,6 +170,7 @@ class Pagination {
         let num = flag ? this.opts.currentPage + 1 : this.opts.currentPage - 1;
         this.goToPage(num);
     }
+
     /**
      * 不同提示处理
      * */
@@ -145,28 +189,34 @@ class Pagination {
 
     bindEvents() {
         let _this = this.root,
-            pageId = "#"+this.opts.id,
+            pageId = "#" + this.opts.id,
             that = this;
-        _this.on('click', `${pageId} a[data-type="num"]`, function (e) {
+        _this.on('click', `${pageId} a[data - type = "num"]`, function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let num = parseInt(_this.text());
             that.goToPage(num);
-        });
-        _this.on('click', `${pageId} a[data-type="text"]`, function (e) {
+        }
+
+    )
+        ;
+        _this.on('click', `${pageId} a[data - type = "text"]`,function (e) {
             e.preventDefault();
             let _this = $(e.target);
             let type = _this.text();
             that.tipHandler(_this, type);
-        })
+        }
+
+    )
     }
-    setOpts(opts){
+
+    setOpts(opts) {
         let options = this.opts;
-        this.opts = $.extend({},options,opts);
+        this.opts = $.extend({}, options, opts);
         this.renderPagination();
     }
 }
 
-export default (options = {})=> {
+export default (options = {}) =>{
     return new Pagination(options)
-};
+}

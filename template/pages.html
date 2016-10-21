@@ -8,13 +8,19 @@
     {{/if}}
     {{/if}}
     <div class="page-num">
-        {{#each showPages}}
-        {{#if cur}}
-        <a href="javascript:void(0)" class="on">{{val}}</a>
+        {{#if urlLink}}
+            {{#urls showPages links}}
+                <a href="javascript:void(0)" class="on">{{val}}</a>
+            {{else}}
+                <a href={{url}} data-type={{type}}>{{val}}</a>
+            {{/urls}}
         {{else}}
-        <a href="javascript:void(0)" data-type={{type}}>{{val}}</a>
+            {{#noUrl showPages}}
+                <a href="javascript:void(0)" class="on">{{val}}</a>
+            {{else}}
+                <a href="javascript:void(0)" data-type={{type}}>{{val}}</a>
+            {{/noUrl}}
         {{/if}}
-        {{/each}}
     </div>
     {{#if showTip}}
     {{#unless leftTip}}

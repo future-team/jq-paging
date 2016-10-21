@@ -448,7 +448,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _optionsJs2 = _interopRequireDefault(_optionsJs);
 
-	var _templatePagesHtml = __webpack_require__(9);
+	__webpack_require__(9);
+
+	var _templatePagesHtml = __webpack_require__(29);
 
 	var _templatePagesHtml2 = _interopRequireDefault(_templatePagesHtml);
 
@@ -458,11 +460,54 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        this.opts = _jquery2['default'].extend({}, _optionsJs2['default'], options);
 	        this.opts.id = this.getUniqueId();
+	        //是否通过link跳转
+	        this.opts.urlLink = this.opts.isLink;
 	        //插入标记位
 	        this.root = _jquery2['default'](this.opts.root);
+	        /**
+	         * 非ajax，currentPage由url确定
+	         * * */
+	        this.opts.urlLink && (this.opts.currentPage = this.getUrlPage());
 	        this.renderPagination();
-	        this.bindEvents();
+	        /**
+	         * 非链接跳转才需要bindEvent
+	         * */
+	        !this.opts.urlLink && this.bindEvents();
 	    }
+
+	    /**
+	     * 从href中获取当前页，更改默认值
+	     * */
+
+	    Pagination.prototype.getUrlPage = function getUrlPage() {
+	        var url = this.opts.linkOpts.baseUrl;
+	        return url.split(this.opts.linkOpts.key + '=')[1].split('&') + '';
+	    };
+
+	    /**
+	     * 获取链接跳转时参数
+	     * */
+
+	    Pagination.prototype.getUrlParam = function getUrlParam() {
+	        this.baseUrl = this.opts.linkOpts.baseUrl;
+	        this.opts.links = this.getUrls();
+	    };
+
+	    /**
+	     * 获得每页具体url
+	     * */
+
+	    Pagination.prototype.getUrls = function getUrls() {
+	        var links = [];
+	        var pageNums = this.opts.showPages,
+	            url = this.baseUrl,
+	            key = this.opts.linkOpts.key;
+
+	        pageNums.forEach(function (item) {
+	            links.push(url.replace(eval('/' + key + '=\\d+/'), key + '=' + item.val));
+	        });
+	        return links;
+	    };
 
 	    /**
 	     * 获取唯一的id
@@ -481,8 +526,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        //防止重新设置后总页数小于当前页,重置为1
 	        if (this.opts.currentPage > this.opts.pageNum) {
 	            this.opts.currentPage = 1;
-	        };
+	        }
 	        this.opts.showPages = this.getShowPage(this.opts.pageNum);
+	        this.opts.urlLink && this.getUrlParam();
 	        this.opts.root && this.renderHtml();
 	    };
 
@@ -612,13 +658,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this.root,
 	            pageId = "#" + this.opts.id,
 	            that = this;
-	        _this.on('click', pageId + ' a[data-type="num"]', function (e) {
+	        _this.on('click', pageId + ' a[data - type = "num"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var num = parseInt(_this.text());
 	            that.goToPage(num);
 	        });
-	        _this.on('click', pageId + ' a[data-type="text"]', function (e) {
+	        _this.on('click', pageId + ' a[data - type = "text"]', function (e) {
 	            e.preventDefault();
 	            var _this = _jquery2['default'](e.target);
 	            var type = _this.text();
@@ -687,7 +733,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * 动态改变配置项参数
 	   * */
-	  setOpts: function setOpts(opts) {}
+	  setOpts: function setOpts(opts) {},
+	  /**
+	   * 是否同步分页，即通过url整体刷新即后端分页
+	   * */
+	  isLink: false,
+	  /**
+	   * 配置link参数
+	   * */
+	  linkOpts: {
+	    /**
+	     * 基本url,不指定默认location.href
+	     * */
+	    baseUrl: location.href,
+	    /**
+	     * 每次需要根据页数改变的key
+	     * 例如page = 1 每次更改page。
+	     * */
+	    key: 'page'
+	  }
 
 	};
 	exports['default'] = options;
@@ -697,57 +761,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(10);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1;
+	'use strict';
 
-	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-	},"2":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	  return "    <div class=\"page-tips\">\n        <span class=\"activePage\">"
-	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
-	    + "</span>\n        <span>/"
-	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
-	    + ",共"
-	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-	    + "条</span>\n    </div>\n";
-	},"4":function(container,depth0,helpers,partials,data) {
-	    var stack1;
+	var _node_modulesHandlebarsRuntime = __webpack_require__(10);
 
-	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.cur : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "");
-	},"5":function(container,depth0,helpers,partials,data) {
-	    var helper;
+	var _node_modulesHandlebarsRuntime2 = _interopRequireDefault(_node_modulesHandlebarsRuntime);
 
-	  return "        <a href=\"javascript:void(0)\" class=\"on\">"
-	    + container.escapeExpression(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"val","hash":{},"data":data}) : helper)))
-	    + "</a>\n";
-	},"7":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-	  return "        <a href=\"javascript:void(0)\" data-type="
-	    + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-	    + "</a>\n";
-	},"9":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-
-	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
-
-	  return "<div class=\"jq-pages\" id="
-	    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">\n"
-	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    <div class=\"page-num\">\n"
-	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.showPages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "    </div>\n"
-	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "</div>";
-	},"useData":true});
+	_node_modulesHandlebarsRuntime2['default'].registerHelper("urls", function (pages, urls, options) {
+	    var item = '';
+	    for (var i = 0; i < pages.length; i++) {
+	        var opts = pages[i];
+	        opts.url = urls[i];
+	        item += pages[i].cur ? options.fn(pages[i]) : options.inverse(opts);
+	    }
+	    return item;
+	});
+	_node_modulesHandlebarsRuntime2['default'].registerHelper("noUrls", function (pages, options) {
+	    var item = '';
+	    for (var i = 0; i < pages.length; i++) {
+	        var opts = pages[i];
+	        item += pages[i].cur ? options.fn(opts) : options.inverse(opts);
+	    }
+	    return item;
+	});
 
 /***/ },
 /* 10 */
@@ -1923,6 +1961,76 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL25vLWNvbmZsaWN0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O3FCQUNlLFVBQVMsVUFBVSxFQUFFOztBQUVsQyxNQUFJLElBQUksR0FBRyxPQUFPLE1BQU0sS0FBSyxXQUFXLEdBQUcsTUFBTSxHQUFHLE1BQU07TUFDdEQsV0FBVyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7O0FBRWxDLFlBQVUsQ0FBQyxVQUFVLEdBQUcsWUFBVztBQUNqQyxRQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssVUFBVSxFQUFFO0FBQ2xDLFVBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDO0tBQy9CO0FBQ0QsV0FBTyxVQUFVLENBQUM7R0FDbkIsQ0FBQztDQUNIIiwiZmlsZSI6Im5vLWNvbmZsaWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyogZ2xvYmFsIHdpbmRvdyAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oSGFuZGxlYmFycykge1xuICAvKiBpc3RhbmJ1bCBpZ25vcmUgbmV4dCAqL1xuICBsZXQgcm9vdCA9IHR5cGVvZiBnbG9iYWwgIT09ICd1bmRlZmluZWQnID8gZ2xvYmFsIDogd2luZG93LFxuICAgICAgJEhhbmRsZWJhcnMgPSByb290LkhhbmRsZWJhcnM7XG4gIC8qIGlzdGFuYnVsIGlnbm9yZSBuZXh0ICovXG4gIEhhbmRsZWJhcnMubm9Db25mbGljdCA9IGZ1bmN0aW9uKCkge1xuICAgIGlmIChyb290LkhhbmRsZWJhcnMgPT09IEhhbmRsZWJhcnMpIHtcbiAgICAgIHJvb3QuSGFuZGxlYmFycyA9ICRIYW5kbGViYXJzO1xuICAgIH1cbiAgICByZXR1cm4gSGFuZGxlYmFycztcbiAgfTtcbn1cbiJdfQ==
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(10);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+	},"2":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "    <div class=\"page-tips\">\n        <span class=\"activePage\">"
+	    + alias4(((helper = (helper = helpers.currentPage || (depth0 != null ? depth0.currentPage : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentPage","hash":{},"data":data}) : helper)))
+	    + "</span>\n        <span>/"
+	    + alias4(((helper = (helper = helpers.pageNum || (depth0 != null ? depth0.pageNum : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNum","hash":{},"data":data}) : helper)))
+	    + ",共"
+	    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+	    + "条</span>\n    </div>\n";
+	},"4":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = (helpers.urls || (depth0 && depth0.urls) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.showPages : depth0),(depth0 != null ? depth0.links : depth0),{"name":"urls","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "");
+	},"5":function(container,depth0,helpers,partials,data) {
+	    var helper;
+
+	  return "                <a href=\"javascript:void(0)\" class=\"on\">"
+	    + container.escapeExpression(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"val","hash":{},"data":data}) : helper)))
+	    + "</a>\n";
+	},"7":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "                <a href="
+	    + alias4(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
+	    + " data-type="
+	    + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
+	    + "</a>\n";
+	},"9":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = (helpers.noUrl || (depth0 && depth0.noUrl) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.showPages : depth0),{"name":"noUrl","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(10, data, 0),"data":data})) != null ? stack1 : "");
+	},"10":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "                <a href=\"javascript:void(0)\" data-type="
+	    + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
+	    + "</a>\n";
+	},"12":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.leftTip : depth0),{"name":"unless","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
+
+	  return "<div class=\"jq-pages\" id="
+	    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">\n"
+	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "    <div class=\"page-num\">\n"
+	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.urlLink : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "")
+	    + "    </div>\n"
+	    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showTip : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "</div>";
+	},"useData":true});
 
 /***/ }
 /******/ ])

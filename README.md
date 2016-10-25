@@ -52,7 +52,25 @@
        /**
         * 动态改变配置项参数
         * */
-       setOpts:function(opts){}
+       setOpts:function(opts){},
+       /**
+         * 是否同步分页，即通过url整体刷新即后端分页
+         * */
+           isLink: false,
+         /**
+          * 配置link参数
+          * */
+         linkOpts:{
+           /**
+            * 基本url,不指定默认location.href
+            * */
+            baseUrl:location.href,
+            /**
+             * 每次需要根据页数改变的key
+             * 例如page = 1 每次更改page。
+             * */
+            key:'page'
+           }
        
  ```
  使用实例：
@@ -114,6 +132,7 @@
   ```
 ## update
 
+   - 0.1.12 新增方法支持后端分页，即配置不同url进行跳转。不通过ajax
    - 0.1.11 修复临界值bug
    - 0.1.10 更新setOpts之后分页的bug
    - 之前版本 init及修复 

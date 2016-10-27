@@ -1,6 +1,7 @@
 # jq-paging
  pagination for jQuery 
  分页组件
+ 关于使用，推荐初始化之后通过setOpts进行不同参数的修改。建议不要重复init
 ## UI展示
  - 具体图如下：    
    总条数，当前页之类提示在左边：  
